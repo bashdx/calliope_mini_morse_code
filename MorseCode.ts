@@ -15,15 +15,15 @@ const LEDCOLORDOT: Colors = Colors.Green;
 
 //Die Länge eines Punkts in Millisekunden
 //The duration of a dot in milli seconds
-const DOTDURATION: number = 333;
+const DOTDURATION: number = 250;
 
 //Die Frequenz in Hertz (Hz) für den Punkt
 //The frequency in Hertz (Hz) for the dot
-const TONEFREQUENCYDOT: number = 440;
+const TONEFREQUENCYDOT: number = 880;
 
 //Die Frequenz in Hertz (Hz) für den Strich
 //The frequency in Hertz (Hz) for the dash
-const TONEFREQUENCYDASH: number = 880;
+const TONEFREQUENCYDASH: number = 440;
 
 //Es gibt zwei Zeichen - lang (Strich), kurz (Punkt)
 //There are two signs available - long (dash), short (dot)
@@ -32,9 +32,9 @@ enum MorseTones {
     Dash
 };
 
-//Die Klasse MorseSign bildet ein einzelnes Morsezeichen ab
-//The class MorseSign handles a single morse sign
-class MorseSign {
+//Die Klasse MorseCode bildet ein einzelnes Morsezeichen ab
+//The class MorseCode handles a single morse sign
+class MorseCode {
 
     //Die Kombination aus Punkten und Strichen, die das Zeichen abbilden
     //The combination from dots and dashes forming the morse sign
@@ -51,10 +51,14 @@ class MorseSign {
         this._morseCharacter = morseCharacter;
     }
 
+    //Getter für die einzelnen Töne
+    //Getter for the tones
     get Tones(): MorseTones[] {
         return this._morseTones;
     }
 
+    //Getter für das zugehörige Zeichen
+    //Getter for the corresponding character
     get Character(): string {
         return this._morseCharacter;
     }
@@ -62,16 +66,42 @@ class MorseSign {
 ;
 
 //Die für die Anwendung verfügbaren Morsezeichen
-//The morse signs available to the application
-const MorseSigns: MorseSign[] =
+//The morse codes available to the application
+const MorseCodes: MorseCode[] =
     [
-        new MorseSign([MorseTones.Dot, MorseTones.Dash], 'A'),
-        new MorseSign([MorseTones.Dash, MorseTones.Dot, MorseTones.Dot, MorseTones.Dot], 'B'),
-        new MorseSign([MorseTones.Dash, MorseTones.Dot, MorseTones.Dash, MorseTones.Dot], 'C'),
-        new MorseSign([MorseTones.Dash, MorseTones.Dot, MorseTones.Dot], 'D'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dash], 'A'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dot, MorseTones.Dot, MorseTones.Dot], 'B'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dot, MorseTones.Dash, MorseTones.Dot], 'C'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dot, MorseTones.Dot], 'D'),
+        new MorseCode([MorseTones.Dot], 'E'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dot, MorseTones.Dash, MorseTones.Dot], 'F'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dash, MorseTones.Dot], 'G'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dot, MorseTones.Dot, MorseTones.Dot], 'H'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dot], 'I'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dash, MorseTones.Dash, MorseTones.Dash], 'J'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dot, MorseTones.Dash], 'K'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dash, MorseTones.Dot, MorseTones.Dot], 'L'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dash], 'M'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dot], 'N'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dash, MorseTones.Dash], 'O'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dash, MorseTones.Dash, MorseTones.Dot], 'P'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dash, MorseTones.Dot, MorseTones.Dash], 'Q'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dash, MorseTones.Dot], 'R'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dot, MorseTones.Dot], 'S'),
+        new MorseCode([MorseTones.Dash], 'T'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dot, MorseTones.Dash], 'U'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dot, MorseTones.Dot, MorseTones.Dash], 'V'),
+        new MorseCode([MorseTones.Dot, MorseTones.Dash, MorseTones.Dash], 'W'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dot, MorseTones.Dot, MorseTones.Dash], 'X'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dot, MorseTones.Dash, MorseTones.Dash], 'Y'),
+        new MorseCode([MorseTones.Dash, MorseTones.Dash, MorseTones.Dot, MorseTones.Dot], 'Z')
     ];
+/*
+Der PXT-Editor auf der Website ist aktuell (29.10.2017) noch nicht in der Lage, mit abstrakten Klassen zu arbeiten, bzw. konnte ich die abgeleiteten Klassen nicht benutzen.
+As of 10/29/2017 the PXT editor on the site was not capable of handling abstract classes and inheritance. I could not instantiate objects of derived classes.
+*/
 
-/*abstract class MorseSignPlayer {
+/*abstract class MorseCodePlayer {
 
     public abstract startPlay(): void;
 
@@ -82,7 +112,7 @@ const MorseSigns: MorseSign[] =
     }
 }*/
 
-/*class LedMorseSignPlayer extends MorseSignPlayer {
+/*class LedMorseCodePlayer extends MorseCodePlayer {
 
     public startPlay(): void {
         basic.setLedColor(LEDCOLOR);
@@ -97,23 +127,33 @@ const MorseSigns: MorseSign[] =
     }
 }*/
 
-class LedMorseSignPlayer {
+//Ein Morsezeichen mit der RGB-LED anzeigen
+//Play a morse code using the RGB-LED
+class LedMorseCodePlayer {
 
+    //Spiele ein einzelnes Zeichen ab
+    //Play a single tone
+    //Parameter morseTone (Typ MorseTone) - das aktuelle Zeichen (Punkt oder Strich) aus der Zeichnfolge
+    //                                    - the current sign (dot or dash) of the morse code
     public startPlay(morseTone: MorseTones): void {
         if (morseTone == MorseTones.Dot) {
+            //Zeichen ist ein Punkt - sign is a dot
             basic.setLedColor(LEDCOLORDOT);
         } else {
+            //Zeichen ist ein Strich - sign is a dash
             basic.setLedColor(LEDCOLORDASH);
         }
     }
 
+    //Beende das Spielen
+    //Stop playing tone
     public stopPlay(): void {
         basic.setLedColor(0);
     }
 }
 
 /*
-class ToneMorseSignPlayer extends MorseSignPlayer {
+class ToneMorseCodePlayer extends MorseCodePlayer {
 
     public startPlay(): void {
         music.ringTone(TONEFREQUENCY);
@@ -128,105 +168,175 @@ class ToneMorseSignPlayer extends MorseSignPlayer {
     }
 }*/
 
-class ToneMorseSignPlayer {
+//Ein Morsezeichen als Ton abspielen
+//Play a morse sign as an audible tone
+class ToneMorseCodePlayer {
 
+    //Spiele ein einzelnes Zeichen ab
+    //Play a single tone
+    //Parameter morseTone (Typ MorseTone) - das aktuelle Zeichen (Punkt oder Strich) aus der Zeichnfolge
+    //                                    - the current sign (dot or dash) of the morse code
     public startPlay(morseTone: MorseTones): void {
         if (morseTone === MorseTones.Dot) {
+            //Zeichen ist ein Punkt - sign is a dot
             music.ringTone(TONEFREQUENCYDOT);
         } else {
+            //Zeichen ist ein Strich - sign is a dash
             music.ringTone(TONEFREQUENCYDASH);
         }
     }
 
+    //Beende das Spielen
+    //Stop playing tone
     public stopPlay(): void {
         music.ringTone(0);
     }
 }
 
-class MorseSignHandler {
-    private _morseSignIndex: number;
-    private _morseSigns: MorseSign[];
-    private _ledMorseSignPlayer: LedMorseSignPlayer;
-    private _toneMorseSignPlayer: ToneMorseSignPlayer;
-    private _currentMorseSign: MorseSign;
+//Beinhaltet die Hauptlogik der Anwendung
+//Contains the main logic of the application
+class MorseCodeHandler {
 
-    constructor(morseSigns: MorseSign[],
-        ledMorseSignPlayer: LedMorseSignPlayer,
-        toneMorseSignPlayer: ToneMorseSignPlayer
+    //Der Index des ausgewählten Morsezeichens - s. Definition "MorseSigns" weiter oben
+    //The index of the currently selected morse code - see definition "MorseSigns" further up
+    private _morseCodeIndex: number;
+
+    //Die verfügbaren Morsezeichen
+    //The available morse code signs 
+    private _morseCodes: MorseCode[];
+
+    //Der Handler zum Abspielen des Morsezeichens mittels RGB-LED
+    //The handler to play the morse code using RGB-LED
+    private _ledMorseCodePlayer: LedMorseCodePlayer;
+
+    //Der Handler zum Abspielen des Morsezeichens mittels Lautsprecher
+    //The handler to play the morse code using loudspeaker
+    private _toneMorseCodePlayer: ToneMorseCodePlayer;
+
+    //Verweis auf das aktuelle Morsezeichen
+    //Reference to the current morse code
+    private _currentMorseCode: MorseCode;
+
+    //Konstruktor - erstelle das Objekt
+    //Constructor - create the object instance
+
+    //Parameter morseCodes (Typ Array von MorseCode) - die zur Verfügung stehenden Morsezeichen
+    //                     (Type array of MorseCode) - the available morse code signs
+    //Parameter morseCodes (Typ LedMorseCodePlayer) - der Handler zum Abspielen mittels RGB-LED
+    //                     (Type LedMorseCodePlayer) - the handler to play the tone using RGB-LED
+    //Parameter morseCodes (Typ ToneMorseCodePlayer) - der Handler zum Abspielen mittels Lautsprecher
+    //                     (Type ToneMorseCodePlayer) - the handler to play the tone using loudspeaker
+    constructor(morseCodes: MorseCode[],
+        ledMorseCodePlayer: LedMorseCodePlayer,
+        toneMorseCodePlayer: ToneMorseCodePlayer
     ) {
-        this._morseSignIndex = 0;
-        this._morseSigns = morseSigns;
-        this._ledMorseSignPlayer = ledMorseSignPlayer;
-        this._toneMorseSignPlayer = toneMorseSignPlayer;
+        //Anfangswerte des Objekts festlegen
+        //Set initial values for object instance
+        this._morseCodeIndex = 0;
+        this._morseCodes = morseCodes;
+        this._ledMorseCodePlayer = ledMorseCodePlayer;
+        this._toneMorseCodePlayer = toneMorseCodePlayer;
 
-        this._currentMorseSign = this._morseSigns[this._morseSignIndex];
+        //Setze den Verweis auf das erste Element der verfügbaren Morsezeichen
+        //Set reference to the first element of the available morse code signs
+        this._currentMorseCode = this._morseCodes[this._morseCodeIndex];
     }
 
+    //Zeige den Buchstaben des aktuellen Morsezeichens auf der LED-Matrix an
+    //Display the letter of the current morse code sign on the LED matrix
     public displayCurrentLetter(): void {
-        basic.showString(this._currentMorseSign.Character);
+        basic.showString(this._currentMorseCode.Character);
     }
 
-    public setNextMorseSign(): void {
-        if (this._morseSignIndex + 1 >= this._morseSigns.length) {
-            this._morseSignIndex = 0;
-            this._currentMorseSign = this._morseSigns[this._morseSignIndex];
+    //Setze den Verweis auf nächste verfügbare Morsezeichen oder beginne von vorne
+    //Set reference to the next available morse code sign or start over
+    public setNextMorseCode(): void {
+        if (this._morseCodeIndex + 1 >= this._morseCodes.length) {
+            //Von vorne beginnen - start over
+            this._morseCodeIndex = 0;
+            this._currentMorseCode = this._morseCodes[this._morseCodeIndex];
             this.displayCurrentLetter();
         } else {
-            this._currentMorseSign = this._morseSigns[++this._morseSignIndex];
+            //Wähle das nächste Zeichen aus - select next morse code sign
+            this._currentMorseCode = this._morseCodes[++this._morseCodeIndex];
             this.displayCurrentLetter();
         }
     }
 
-    public setPreviousMorseSign(): void {
-        if (this._morseSignIndex - 1 < 0) {
-            this._morseSignIndex = this._morseSigns.length - 1;
-            this._currentMorseSign = this._morseSigns[this._morseSignIndex];
+    //Setze den Verweis auf vorherige verfügbare Morsezeichen oder beginne von vorne
+    //Set reference to the previous available morse code sign or start over
+    public setPreviousMorseCode(): void {
+        if (this._morseCodeIndex - 1 < 0) {
+            //Von vorne beginnen - start over
+            this._morseCodeIndex = this._morseCodes.length - 1;
+            this._currentMorseCode = this._morseCodes[this._morseCodeIndex];
             this.displayCurrentLetter();
         } else {
-            this._currentMorseSign = this._morseSigns[--this._morseSignIndex];
+            //Wähle das vorherige Zeichen aus - select previous morse code sign
+            this._currentMorseCode = this._morseCodes[--this._morseCodeIndex];
             this.displayCurrentLetter();
         }
     }
 
-    public playCurrentMorseSign(): void {
-        for (let tone of this._currentMorseSign.Tones) {
-            this._ledMorseSignPlayer.startPlay(tone);
-            this._toneMorseSignPlayer.startPlay(tone);
+    //Spiele das aktuelle Morsezeichen ab
+    //Play current morse code sign
+    public playCurrentMorseCode(): void {
+        //Iteriere über die einzelnen Töne
+        //Iterate over the tones
+        for (let tone of this._currentMorseCode.Tones) {
+            this._ledMorseCodePlayer.startPlay(tone);
+            this._toneMorseCodePlayer.startPlay(tone);
 
+            //Pausiere die Ausführung, solange wie die Ausführung dauert (Punkt oder Strich)
+            //Pause execution as long as the duration of the tone (dot or dash)
             if (tone == MorseTones.Dot) {
                 basic.pause(DOTDURATION);
             } else {
                 basic.pause(DOTDURATION * DASHDURATIONFACTOR);
             }
 
-            this._ledMorseSignPlayer.stopPlay();
-            this._toneMorseSignPlayer.stopPlay();
+            //Setze RGB-LED und Lautsprecher zurück
+            //Reset RGB-LED and loudspeaker
+            this._ledMorseCodePlayer.stopPlay();
+            this._toneMorseCodePlayer.stopPlay();
+
+            //Pausiere - laut Definition ist zwischen jedem Zeichen eine Pause von einem Punkt einzuhalten
+            //Pause - according to definition there is a break of the length of one dot between tones required
+            basic.pause(DOTDURATION);
         }
     }
 
+    //Initialisiere den Handler
+    //Initialize handler
     public init(): void {
         this.displayCurrentLetter();
     }
 
 }
 
-let ledMorseSignPlayer: LedMorseSignPlayer = new LedMorseSignPlayer();
-let toneMorseSignPlayer: ToneMorseSignPlayer = new ToneMorseSignPlayer();
+//Erstelle Objekt-Instanzen
+//Create object instances
+let ledMorseCodePlayer: LedMorseCodePlayer = new LedMorseCodePlayer();
+let toneMorseCodePlayer: ToneMorseCodePlayer = new ToneMorseCodePlayer();
 
-let morseSignHandler: MorseSignHandler =
-    new MorseSignHandler(MorseSigns, ledMorseSignPlayer, toneMorseSignPlayer);
+let morseCodeHandler: MorseCodeHandler =
+    new MorseCodeHandler(MorseCodes, ledMorseCodePlayer, toneMorseCodePlayer);
 
+//Setze die Button-Handler
+//Set button handlers
 input.onButtonPressed(Button.A, () => {
-    morseSignHandler.setPreviousMorseSign();
+    morseCodeHandler.setPreviousMorseCode();
 });
 
 input.onButtonPressed(Button.B, () => {
-    morseSignHandler.setNextMorseSign();
+    morseCodeHandler.setNextMorseCode();
 });
 
 input.onButtonPressed(Button.AB, () => {
-    morseSignHandler.playCurrentMorseSign();
+    morseCodeHandler.playCurrentMorseCode();
 });
 
-morseSignHandler.init();
+//Initialisiere die Anwendung
+//Initialize application
+morseCodeHandler.init();
 
