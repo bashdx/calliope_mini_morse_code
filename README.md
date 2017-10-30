@@ -1,4 +1,8 @@
-# calliope_mini_morse_code
+# Calliope mini - morse code
+
+
+
+
 Deutsch:
 --------------------------------------
 
